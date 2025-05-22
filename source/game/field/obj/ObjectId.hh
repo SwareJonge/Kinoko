@@ -16,6 +16,7 @@ enum class ObjectId {
     OilSFC = 0x15d,
     ParasolR = 0x16e,
     Kuribo = 0x191,
+    Rock = 0x198,
     WLFirebarGC = 0x195,
     WLFireRingGC = 0x1a1,
     PuchiPakkun = 0x1aa,

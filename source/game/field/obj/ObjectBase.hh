@@ -36,6 +36,16 @@ public:
 
     [[nodiscard]] virtual const char *getKclName() const;
 
+    /// @addr{0x80821DEC}
+    virtual void disableCollision() {
+        m_boxColUnit->m_flag.setBit(eBoxColFlag::Intangible);
+    }
+
+    /// @addr{0x80821E00}
+    virtual void enableCollision() {
+        m_boxColUnit->m_flag.resetBit(eBoxColFlag::Intangible);
+    }
+
     /// @addr{0x80681598}
     [[nodiscard]] virtual const EGG::Vector3f &getPosition() const {
         return m_pos;
@@ -60,11 +70,14 @@ protected:
     void calcTransform();
     void linkAnims(const std::span<const char *> &names, const std::span<Render::AnmType> types);
     void setMatrixTangentTo(const EGG::Vector3f &up, const EGG::Vector3f &tangent);
+    void setMatrixLookAt(const EGG::Vector3f &v);
 
     static EGG::Vector3f RotateAxisAngle(f32 angle, const EGG::Vector3f &axis,
             const EGG::Vector3f &v1);
     static void SetRotTangentHorizontal(EGG::Matrix34f &mat, const EGG::Vector3f &up,
             const EGG::Vector3f &tangent);
+
+    static EGG::Matrix34f FUN_806B3CA4(const EGG::Vector3f &v);
 
     /// @addr{0x8086C098}
     [[nodiscard]] static EGG::Vector3f Interpolate(f32 t, const EGG::Vector3f &v0,
